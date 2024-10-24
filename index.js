@@ -6,7 +6,7 @@ const usersRouter = require("./routes/users.js")
 const postsRouter = require("./routes/posts.js")
 const error = require('./utilities/error.js')
 const path = require('path')
-
+require('dotenv').config();
 
 // Middleware
 app.use(express.urlencoded({ extended: true }))
