@@ -6,7 +6,12 @@ const usersRouter = require("./routes/users.js")
 const postsRouter = require("./routes/posts.js")
 const error = require('./utilities/error.js')
 const path = require('path')
-require('dotenv').config();
+const commentsRouter = require("./routes/comments.js")
+const { errorHandler } = require('./utilities/error');
+
+
+
+
 
 // Middleware
 app.use(express.urlencoded({ extended: true }))
@@ -55,6 +60,8 @@ app.use('/api', (req, res, next) => {
 //Router Set Up
 app.use("/api/users", usersRouter)
 app.use("/api/posts", postsRouter)
+app.use("/api/comments", commentsRouter)
+
 
 
 // New User form
@@ -153,9 +160,9 @@ app.use((req, res, next) => {
   next(error(404, "Resource Not Found"));
 });
 
-// Custom 404 (not found) middleware.
-// Since we place this last, it will only process
-// tesif no other rou have already sent a response!
+// // Custom 404 (not found) middleware.
+// // Since we place this last, it will only process
+// // tesif no other rou have already sent a response!
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.json({ error: err.message });
